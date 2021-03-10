@@ -1,11 +1,10 @@
-## 开发
+### 前端项目
+### python脚本生成词云图待上传，因此首页暂时缺少词云图
 
 ```bash
 # 克隆项目
-git clone https://gitee.com/y_project/RuoYi-Vue
 
 # 进入项目目录
-cd ruoyi-ui
 
 # 安装依赖
 npm install》
