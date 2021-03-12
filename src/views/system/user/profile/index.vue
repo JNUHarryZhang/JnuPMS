@@ -24,16 +24,13 @@
                 <div class="pull-right">{{ user.email }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="tree" />所属部门
-                <div class="pull-right" v-if="user.dept">{{ user.dept.deptName }} / {{ postGroup }}</div>
-              </li>
-              <li class="list-group-item">
                 <svg-icon icon-class="peoples" />所属角色
-                <div class="pull-right">{{ roleGroup }}</div>
+                <div class="pull-right">管理员</div>
+                <!--<div class="pull-right">{{ roleGroup }}</div>-->
               </li>
               <li class="list-group-item">
                 <svg-icon icon-class="date" />创建日期
-                <div class="pull-right">2020-01-01 09:11:56</div>
+                <div class="pull-right">2021-01-01 09:11:56</div>
               </li>
             </ul>
           </div>
