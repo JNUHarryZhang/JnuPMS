@@ -3,6 +3,7 @@
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData" />
     </el-row>
+    <h3>词云图</h3>
     <el-row>
       <img v-bind:src=this.cloudImg />
     </el-row>
