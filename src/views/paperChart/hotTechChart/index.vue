@@ -1,150 +1,90 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" />
+  <div class="app-container">
+    <div
+      class="grid-content bg-purple-light"
+      style="border: 1px solid #e4e7eb"
+    >
+      <div
+        :class="className"
+        id="drawChart"
+        :style="{ height: height, width: width }"
+      ></div>
+    </div>
+  </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
+  //导入echarts
+  import echarts from "echarts";
+  //设置图表大小
+  import resize from "@/views/dashboard/mixins/resize";
   import { getHotTechnology } from "@/api/paper/paperInfo/paper";
 
   export default {
+    name: "ColumnarChart",
+    mixins: [resize],
     props: {
       className: {
         type: String,
-        default: 'chart'
+        default: "chart",
       },
       width: {
         type: String,
-        default: '100%'
+        default: "100%",
       },
       height: {
         type: String,
-        default: '350px'
+        default: "400px",
       },
       autoResize: {
         type: Boolean,
-        default: true
+        default: true,
       },
-      chartData: {
-        type: Object,
-        required: true
-      }
     },
     data() {
-      return {
-        chart: null,
-        years: [],
-        hotTechData: []
-      }
+      // 遮罩层
+      loading: false
+      techType: ['A']
+      techNum: [12]
+
     },
-    watch: {
-      chartData: {
-        deep: true,
-        handler(val) {
-          this.setOptions(val)
-        }
-      }
-    },
+
     mounted() {
-      this.$nextTick(() => {
-        this.initChart();
-      })
-    },
-    beforeDestroy() {
-      if (!this.chart) {
-        return
-      }
-      this.chart.dispose();
-      this.chart = null
+      this.drawChart();
     },
     methods: {
-
-      getTopTechnology() {
-        return getHotTechnology().then(
-          response => {
-            this.hotTechData = response.data;
-            this.years = response.years;
-            return Promise.resolve();
-          });
-      },
-
-      async initChart() {
-
-        await this.getTopTechnology();
-
-        this.chart = echarts.init(this.$el, 'hotTechChart');
-        this.setOptions(this.chartData)
-      },
-      setOptions({ expectedData, actualData } = {}) {
-        this.chart.setOption({
+      drawChart() {
+        const myChart = echarts.init(document.getElementById("drawChart"));
+        myChart.setOption({
           title: {
-            text: '热门技术曲线趋势图',
+            text: "历年热门技术统计图",
+          },
+          tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+              type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
           },
           xAxis: {
-            data: this.years,
-            boundaryGap: false,
-            axisTick: {
-              show: false
-            }
-          },
-          grid: {
-            left: 10,
-            right: 10,
-            bottom: 20,
-            top: 30,
-            containLabel: true
-          },
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'cross'
+            name: '使用技术',
+            type: 'category',
+            data: ['Spring', 'Java', 'Mysql', 'Spring', 'Java', 'Mysql', 'C++', 'Python', 'javascript', 'c#'],
+            axisLabel:{
+              textStyle:{
+                fontSize: 12 // 让字体变小
+              },
+              rotate: -20,    // 字体倾斜30度
             },
-            padding: [5, 10]
           },
           yAxis: {
-            axisTick: {
-              show: false
-            }
-          },
-          legend: {
-            data: this.years,
+            type: 'value',
+            name: '使用数量',
           },
           series: [{
-            name: 'java', itemStyle: {
-              normal: {
-                color: '#FF005A',
-                lineStyle: {
-                  color: '#FF005A',
-                  width: 2
-                }
-              }
-            },
-            smooth: true,
-            type: 'line',
-            data: expectedData,
-            animationDuration: 2800,
-            animationEasing: 'cubicInOut'
-          },
-            {
-              name: 'jsp',
-              smooth: true,
-              type: 'line',
-              itemStyle: {
-                normal: {
-                  color: '#3888fa',
-                  lineStyle: {
-                    color: '#3888fa',
-                    width: 2
-                  },
-                  areaStyle: {
-                    color: '#f3f8ff'
-                  }
-                }
-              },
-              data: actualData,
-              animationDuration: 2800,
-              animationEasing: 'quadraticOut'
-            }]
-        })
+            data: [120, 200, 150, 120, 200, 150, 80, 70, 110, 130],
+            type: 'bar'
+          }]
+        });
       }
     }
   }
