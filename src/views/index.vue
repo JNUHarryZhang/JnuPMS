@@ -3,10 +3,12 @@
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData" />
     </el-row>
-    <h3>论文题目词云图</h3>
-    <el-row>
-      <img v-bind:src=this.cloudImg />
-    </el-row>
+    <el-card>
+      <span style="color: #008ACD; font-size: 18px">论文题目词云图</span>
+      <el-row style="padding-top: 10px">
+        <img v-bind:src=this.cloudImg />
+      </el-row>
+    </el-card>
   </div>
 </template>
 
