@@ -80,7 +80,15 @@ export function getTeacherSource() {
 // 获取热门技术
 export function getHotTechnology() {
   return request({
-    url: '/system/chart/hotTechData/',
+    url: '/system/chart/getTopTen/',
+    method: 'get'
+  })
+}
+
+// 获取知识图谱
+export function getKnowledgeGraphData() {
+  return request({
+    url: '/system/chart/tu/',
     method: 'get'
   })
 }

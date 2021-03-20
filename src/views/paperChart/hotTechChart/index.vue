@@ -53,7 +53,17 @@
       this.drawChart();
     },
     methods: {
-      drawChart() {
+      getSourceData() {
+        return getHotTechnology().then(
+          response => {
+            this.techType = response.data.techType;
+            this.techNum = response.data.techNum;
+            return Promise.resolve();
+          });
+      },
+
+      async drawChart() {
+        await this.getSourceData();
         const myChart = echarts.init(document.getElementById("drawChart"));
         myChart.setOption({
           title: {
@@ -68,7 +78,7 @@
           xAxis: {
             name: '使用技术',
             type: 'category',
-            data: ['Spring', 'Java', 'Mysql', 'Spring', 'Java', 'Mysql', 'C++', 'Python', 'javascript', 'c#'],
+            data: this.techType,
             axisLabel:{
               textStyle:{
                 fontSize: 12 // 让字体变小
@@ -81,7 +91,7 @@
             name: '使用数量',
           },
           series: [{
-            data: [120, 200, 150, 120, 200, 150, 80, 70, 110, 130],
+            data: this.techNum,
             type: 'bar'
           }]
         });

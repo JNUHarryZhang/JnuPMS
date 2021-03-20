@@ -2,8 +2,13 @@
 <project version="4">
   <component name="Encoding" addBOMForNewFiles="with NO BOM">
     <file url="file://$PROJECT_DIR$/README.md" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/mock/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/mock/json/test.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/views/dashboard/LineChart.vue" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/views/index.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/views/paperChart/paperKnowledgeGraph/index.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/views/paperChart/paperKnowledgeGraph/mock.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/views/paperChart/paperKnowledgeGraph/mock/expendNodes.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/views/paperUpload/paperFileUpload/index.vue" charset="UTF-8" />
     <file url="PROJECT" charset="GBK" />
   </component>
