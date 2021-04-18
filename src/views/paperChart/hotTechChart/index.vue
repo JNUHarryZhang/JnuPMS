@@ -78,7 +78,7 @@
           xAxis: {
             name: '使用技术',
             type: 'category',
-            data: this.techType,
+            data: this.techType,   // 技术类别的数据
             axisLabel:{
               textStyle:{
                 fontSize: 12 // 让字体变小
@@ -88,7 +88,7 @@
           },
           yAxis: {
             type: 'value',
-            name: '使用数量',
+            name: '使用数量', // 论文使用该技术的数量
           },
           series: [{
             data: this.techNum,

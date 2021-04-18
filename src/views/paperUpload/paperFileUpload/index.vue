@@ -51,7 +51,7 @@
         </el-form-item>
         <el-form-item label="课题来源" prop="titleSource">
           <el-select
-            v-model="queryParams.titleSource"
+            v-model="form.titleSource"
             placeholder="请选择课题来源"
             clearable
             size="small"
@@ -65,8 +65,21 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="技术类别" prop="techType">
-          <el-input v-model="form.techType" placeholder="请输入技术类别名称" />
+        <el-form-item label="技术类别" prop="techId">
+          <el-select
+            v-model="form.techId"
+            placeholder="请输入技术类别名称"
+            clearable
+            size="small"
+            style="width: 240px"
+          >
+            <el-option
+              v-for="dict in techType"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -100,8 +113,21 @@
         <el-form-item label="老师姓名" prop="teacher">
           <el-input v-model="form.teacher" placeholder="请输入老师姓名" />
         </el-form-item>
-        <el-form-item label="技术类别" prop="techType">
-          <el-input v-model="form.techType" placeholder="请输入技术类别名称" />
+        <el-form-item label="技术类别" prop="techId">
+          <el-select
+            v-model="form.techId"
+            placeholder="请输入技术类别名称"
+            clearable
+            size="small"
+            style="width: 240px"
+          >
+            <el-option
+              v-for="dict in this.techType"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="课题来源" prop="titleSource">
           <el-select
@@ -165,11 +191,24 @@
           {value: "4", label: '其他'},
         ],
 
+        // 技术类别数据字典
+        techType: [
+          {value: "2", label: 'SpringBoot'},
+          {value: "3", label: 'C++'},
+          {value: "4", label: 'Python'},
+          {value: "5", label: 'Javascript'},
+          {value: "6", label: 'C#'},
+          {value: "7", label: 'Java'},
+          {value: "8", label: 'Vue'},
+          {value: "9", label: 'Mysql'},
+          {value: "10", label: 'Spark'},
+        ],
+
         // 查询参数
         queryParams: {
           pageNum: 1,
           pageSize: 10,
-          techType: undefined,
+          techId: undefined,
           teacher: undefined,
           title: undefined,
           titleSource: undefined
@@ -288,7 +327,7 @@
       reset() {
         this.form = {
           userName: undefined,
-          techType: undefined,
+          techId: undefined,
           teacher: undefined,
           title: undefined,
           titleSource: "0",
