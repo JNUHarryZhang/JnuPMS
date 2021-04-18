@@ -147,7 +147,7 @@
         </el-form-item>
       </el-form>
       <el-button type="primary" @click="submitEditForm">确 定</el-button>
-      <el-button @click="cancel">取 消</el-button>
+      <el-button @click="cancelUpdate">取 消</el-button>
     </el-dialog>
 
   </div>
@@ -265,7 +265,6 @@
         this.file = file;
         const isAccept = file.name.endsWith('doc') || file.name.endsWith('docx');
         const isLt50M = file.size / 1024 / 1024 < 50;
-        console.log(isAccept);
         if (!isAccept) {
           this.$message.error('上传文件只能是 doc 或 docx 格式!')
         }
@@ -319,7 +318,7 @@
       },
 
       // 取消修改按钮
-      cancel() {
+      cancelUpdate() {
         this.openEdit = false;
       },
 
