@@ -45,6 +45,15 @@ export function uploadPaper(data) {
   })
 }
 
+
+// 下载论文
+export function downloadPaper(paperId) {
+  return request({
+    url: '/common/downloadPaper?fileName=test.txt&delete=false',
+    method: 'get'
+  })
+}
+
 // 查询paper详细
 export function getPaper(paperId) {
   return request({

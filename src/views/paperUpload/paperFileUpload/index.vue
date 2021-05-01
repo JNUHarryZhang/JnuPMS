@@ -25,6 +25,17 @@
           <el-button
             size="mini"
             type="text"
+            icon="el-icon-download"
+          ><a :href=handleDownload(scope.row) target="_blank">下载</a> </el-button>
+          <!--<el-button-->
+            <!--size="mini"-->
+            <!--type="text"-->
+            <!--icon="el-icon-download"-->
+            <!--@click="handleDownload(scope.row)"-->
+          <!--&gt;下载</el-button>-->
+          <el-button
+            size="mini"
+            type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
           >删除</el-button>
@@ -154,7 +165,7 @@
 </template>
 
 <script>
-  import { listPaper, uploadPaper, delPaper, getPaper, uploadFile, updatePaper } from "@/api/paper/paperInfo/paper";
+  import { downloadPaper, listPaper, uploadPaper, delPaper, getPaper, uploadFile, updatePaper } from "@/api/paper/paperInfo/paper";
 
   export default {
     name: "Paper",
@@ -224,20 +235,26 @@
       // 课题来源映射
       sourceFormat(row) {
         const sourceId = row.titleSource;
-        let sourceName;
-        switch(sourceId) {
-          case '1':
-            sourceName = '教师科研';
-            break;
-          case '2':
-            sourceName = '社会生产实践';
-            break;
-          case '3':
-            sourceName = '教学';
-            break;
-          default:
-            sourceName = '其他';
-        }
+        const sourceMap = {
+          '1': '教师科研',
+          '2': '社会生产实践',
+          '3': '教学',
+          '4': '其他'
+        };
+        const sourceName = sourceMap[sourceId];
+        // switch(sourceId) {
+        //   case '1':
+        //     sourceName = '教师科研';
+        //     break;
+        //   case '2':
+        //     sourceName = '社会生产实践';
+        //     break;
+        //   case '3':
+        //     sourceName = '教学';
+        //     break;
+        //   default:
+        //     sourceName = '其他';
+        // }
         return sourceName;
       },
 
@@ -359,6 +376,12 @@
         });
       },
 
+      /** 下载按钮操作 */
+      handleDownload(row) {
+        let url = process.env.VUE_APP_BASE_API+`/common/downloadPaper?fileId=${row.id}`;
+        return url;
+      },
+
       /** 新增论文确定按钮 */
       submitForm: function() {
         console.log(this.file);
@@ -395,6 +418,8 @@
 
       /**上传论文附带信息**/
       handleUpload() {
+        this.reset();
+        this.title = "上传论文基本信息";
         this.open = true;
       },
 
